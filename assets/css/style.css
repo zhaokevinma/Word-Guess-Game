@@ -1,0 +1,9 @@
+#hidden {
+    display: none;
+}
+
+#shown {
+    display: block;
+    color: black;
+    font-size: 24;
+}
