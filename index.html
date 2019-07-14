@@ -17,6 +17,9 @@
         <script>
             var wordPool = ['PIKACHU', 'BULBASAUR', 'CHARMANDER', 'SQUIRTLE'];
             var word = wordPool[Math.floor(Math.random() * wordPool.length)];
+            console.log(word);
+
+            var startSearch = 0;
             var wrongLetter = [];
             var chancesLeft = 20;
             var wordOnDisplay = [];
@@ -24,13 +27,22 @@
             document.onkeyup = function(event) {
                 var letter = event.key.toUpperCase();
                 
-                if (word.indexOf(letter) == -1) {
-                    wrongLetter.push(letter);
+                if (word.indexOf(letter, startSearch) == -1) {
+                    if (wrongLetter.indexOf(letter) == -1) {
+                        wrongLetter.push(letter);
+                    }
                     chancesLeft--;
                 }
 
                 else {
-                    wordOnDisplay[parseInt(word.indexOf(letter))] = letter;
+                    if (word.lastIndexOf(letter, startSearch) != word.indexOf(letter, startSearch)) {
+                        wordOnDisplay[parseInt(word.indexOf(letter, startSearch))] = letter;
+                        startSearch = word.indexOf(letter, startSearch) + 1;
+                    }
+
+                    else {
+                        wordOnDisplay[parseInt(word.indexOf(letter))] = letter;
+                    }
                 }
                 document.getElementById('placeholder').innerHTML = wordOnDisplay;
                 document.getElementById('guessedLetters').innerHTML = wrongLetter;
