@@ -22,12 +22,12 @@ for (let i = 0; i < word.length; i++) {
     letterHolder.className = 'letterHolder';
     letterHolder.id = i;
     document.getElementById('placeHolder').appendChild(letterHolder);
+    document.getElementById(i).textContent = word[i];
 }
 
-var startSearch = 0;
 var wrongLetter = [];
+var verifyForWin = [];
 var chancesLeft = 20;
-var wordOnDisplay = [];
 
 document.onkeyup = function(event) {
     var letter = event.key.toUpperCase();
@@ -36,31 +36,28 @@ document.onkeyup = function(event) {
         if (wrongLetter.indexOf(letter) == -1) {
             wrongLetter.push(letter);
         }  
+
         chancesLeft--;
     }
 
     else {
-        if (word.lastIndexOf(letter, startSearch) != word.indexOf(letter, startSearch)) {
-            wordOnDisplay[parseInt(word.indexOf(letter, startSearch))] = letter;
-            startSearch = word.indexOf(letter, startSearch);
-        }
-
-        else {
-            wordOnDisplay[parseInt(word.indexOf(letter))] = letter;
-            document.getElementById(parseInt(wordOnDisplay.indexOf(letter))).textContent = letter;
-        }
+        document.getElementById(word.indexOf(letter)).className = 'letterHolder shown';
+        document.getElementById(word.lastIndexOf(letter)).className = 'letterHolder shown';
+        verifyForWin[word.indexOf(letter)] = letter;
+        verifyForWin[word.lastIndexOf(letter)] = letter;
     }
 
     document.getElementById('infoPage').innerHTML = 'Keep going!';
     document.getElementById('guessedLetters').innerHTML = 'Wrong letters: ' + wrongLetter;
     document.getElementById('chancesLeft').innerHTML = 'Chances left: ' + chancesLeft;
 
-    if (chancesLeft <= 0) {
+    if (verifyForWin.join("") == word) {
+        document.getElementById('infoPage').innerHTML = 'You Win! Refresh the page if you want to play again!';
+    }
+
+    else if (chancesLeft <= 0) {
         document.getElementById('infoPage').innerHTML = 'You lose! Refresh the page to start over!';
         document.getElementById('chancesLeft').innerHTML = 'Chances left: 0';
     }
-
-    else if (wordOnDisplay.join("") == word) {
-        document.getElementById('infoPage').innerHTML = 'You win! Refresh the page to start over!';
-    }
 };
+

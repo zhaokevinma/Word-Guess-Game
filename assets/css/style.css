@@ -15,6 +15,11 @@
     float: left;
     margin: 50px 10px;
     text-align: center;
+    color: aquamarine;
+}
+
+.shown {
+    color: black;
 }
 
 #guessedLetters {
