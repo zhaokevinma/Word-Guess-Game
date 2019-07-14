@@ -1,9 +1,28 @@
-#hidden {
-    display: none;
+#game {
+    width: 960px;
+    height: 400px;
+    margin: 100px auto; 
+    font-family: 'Notable', sans-serif;
+    font-size: 36px;
 }
 
-#shown {
-    display: block;
-    color: black;
-    font-size: 24;
+.letterHolder {
+    background-color: aquamarine;
+    width: 54px;
+    height: 54px;
+    line-height: 54px;
+    font-size: 36px;
+    float: left;
+    margin: 50px 10px;
+    text-align: center;
+}
+
+#guessedLetters {
+    clear: both;
+}
+
+img {
+    width: auto;
+    height: auto;
+    max-height: 250px;
 }
